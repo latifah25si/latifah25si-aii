@@ -34,7 +34,10 @@ class QuestionController extends Controller
         $data['pertanyaan'] = $request->pertanyaan;
 
         return view('home-question-respon', $data);
+
+        return redirect()->route('home-question-respon')-> with('info','Data sudah berhasil di inputkan'$data);
     }
+
 
     /**
      * Display the specified resource.

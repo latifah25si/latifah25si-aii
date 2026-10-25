@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,4 +16,10 @@ class Pelanggan extends Model
         'email',
         'phone',
     ];
+
+    public function index()
+    {
+        $pelanggan = Pelanggan::all(); // Mengambil data dari tabel pelanggan
+        return view('dashboard', compact('pelanggan'));
+    }
 }

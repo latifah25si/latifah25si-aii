@@ -358,7 +358,7 @@
                     <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
                 </div>
                 <div>
-                    <a href="" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                    <a href="/pelanggan" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
                 </div>
             </div>
         </div>
@@ -367,19 +367,15 @@
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
                     <div class="card-body">
-                        <form action="{{ route('pelanggan.store') }}" method="POST">
-
+                        <form action="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
-
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-sm-6">
                                     <!-- First Name -->
                                     <div class="mb-3">
-                                        <label for="first_name" class="form-label">First name</label>
-                                        <input type="text" id="first_name" class="form-control"
-                                            value="{{ $dataPelanggan->first_name }}" name="first_name" required>
+                                        <label>Nama Depan</label>
+                                        <input type="text" name="first_name" value="{{ $dataPelanggan->first_name }}" class="form-control">
                                     </div>
 
                                     <!-- Last Name -->
@@ -403,8 +399,8 @@
                                         <label for="gender" class="form-label">Gender</label>
                                         <select id="gender" name="gender" class="form-select" name="gender">
                                             <option value="">Gender</option>
-                                            <option value="Female"{{ $dataPelanggan->gender == 'Female' ? 'selected' : '' }}>Female</option>
-                                            <option value="Male"{{ $dataPelanggan->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                            <option value="Female" {{ $dataPelanggan->gender == 'Female' ? 'selected' : '' }}>Female</option>
+                                            <option value="Male" {{ $dataPelanggan->gender == 'Male' ? 'selected' : '' }}>Male</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
@@ -427,7 +423,7 @@
 
                                     <!-- Buttons -->
                                     <div class="">
-                                        <button type="submit" class="btn btn-info">Simpan Perubahan</button>
+                                        <button type="submit" class="btn btn-primary">Update Data</button>
                                         <a href="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id) }}"
                                             class="btn btn-outline-secondary ms-2">Batal</a>
                                     </div>

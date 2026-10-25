@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
@@ -48,16 +49,15 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dataPelanggan'] = Pelanggan::findOrFail($pelanggan_id);
-        return view('admin.pelanggan.edit', $data);
+        $dataPelanggan = Pelanggan::findOrFail($id);
+        return view('admin.pelanggan.edit', compact('dataPelanggan'));
     }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $pelanggan_id = $id;
-        $pelanggan    = Pelanggan::findOrFail($pelanggan_id);
+        $pelanggan = Pelanggan::findOrFail($id);
 
         $pelanggan->first_name = $request->first_name;
         $pelanggan->last_name  = $request->last_name;
@@ -67,6 +67,7 @@ class PelangganController extends Controller
         $pelanggan->phone      = $request->phone;
 
         $pelanggan->save();
+
         return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
     }
     /**

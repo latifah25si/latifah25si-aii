@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 
     @section('content')
@@ -50,7 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data user as $item)
+                                    @foreach($dataUser as $item)
                                         <tr>
                                             <td>{{ $item->first_name }}</td>
                                             <td>{{ $item->last_name }}</td>

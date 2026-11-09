@@ -1,95 +1,69 @@
 @extends('layouts.admin.app')
 
-
-    @section('content')
-       {{-- start main content --}}
-        <div class="py-4">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="#">
-                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                </path>
-                            </svg>
-                            Edit
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="#">user</a></li>
-                </ol>
-            </nav>
-            <div class="d-flex justify-content-between w-100 flex-wrap">
-                <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">Data user</h1>
-                    <p class="mb-0">List data seluruh user</p>
-                </div>
-                <div>
-                    <a href="{{ route('user.create') }}" class="btn btn-success text-white"><i
-                            class="far fa-question-circle me-1"></i> Tambah user</a>
-                </div>
-            </div>
+@section('content')
+<div class="py-4">
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+            </li>
+            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah User</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h4">Tambah User</h1>
+            <p class="mb-0">Form untuk menambahkan data user baru.</p>
         </div>
+        <div>
+            <a href="{{ route('user.index') }}" class="btn btn-dark">Kembali</a>
+        </div>
+    </div>
+</div>
 
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card border-0 shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="table-user" class="table table-centered table-nowrap mb-0 rounded">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="border-0">First Name</th>
-                                        <th class="border-0">Last Name</th>
-                                        <th class="border-0">Birthday</th>
-                                        <th class="border-0">Gender</th>
-                                        <th class="border-0">Email</th>
-                                        <th class="border-0">Phone</th>
-                                        <th class="border-0 rounded-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($dataUser as $item)
-                                        <tr>
-                                            <td>{{ $item->first_name }}</td>
-                                            <td>{{ $item->last_name }}</td>
-                                            <td>{{ $item->birthday }}</td>
-                                            <td>{{ $item->gender }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                            <td>
-                                                <a href="{{ route('user.edit', $item->user_id) }}"
-                                                    class="btn btn-info btn-sm">
-                                                    <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
-                                                        stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10">
-                                                        </path>
-                                                    </svg>
-                                                    Edit
-                                                </a>
-                                                <!-- Tombol Hapus -->
-        <form action="{{ route('user.destroy', $item->user_id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm">
-                <svg class="icon icon-xs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-                Hapus
-            </button>
-        </form>
-    </td>
-                                        </tr>
-                                    @endforeach
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+            <div class="card-body">
+                {{-- Tampilkan error validasi jika ada --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger mb-4">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                                </tbody>
-                            </table>
+                <form action="{{ route('user.store') }}" method="POST">
+                    @csrf
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-sm-12 mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" class="form-control" name="name" value="{{ old('name') }}" required>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password" required>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required>
                         </div>
                     </div>
-                </div>
+                    <div>
+                        <button type="submit" class="btn btn-gray-800">Simpan</button>
+                        <a href="{{ route('user.index') }}" class="btn btn-light ms-2">Batal</a>
+                    </div>
+                </form>
             </div>
         </div>
-        {{-- end main content --}}
+    </div>
+</div>
+@endsection
